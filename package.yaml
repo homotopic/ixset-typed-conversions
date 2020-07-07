@@ -1,0 +1,34 @@
+name:                ixset-typed-conversions
+version:             0.1.0.0
+git:                 https://gitlab.com/homotopic-tech/ixset-typed-conversions
+license:             MIT
+author:              "Daniel Firth"
+maintainer:          "dan.firth@homotopic.tech"
+copyright:           "2020 Daniel Firth"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+synopsis:            Conversions from ixset-typed to other containers.
+category:            Data Structures
+
+description:         Conversions from ixset-typed to other containers; HashMaps, zippers.
+
+dependencies:
+- base >= 4.7 && < 5
+- exceptions
+- hashable
+- ixset-typed
+- unordered-containers
+- zipper-extra
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wredundant-constraints
+
+library:
+  source-dirs: src

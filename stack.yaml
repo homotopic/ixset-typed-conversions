@@ -1,0 +1,6 @@
+resolver: lts-16.4
+packages:
+- .
+extra-deps:
+- comonad-extras-4.0.1
+- zipper-extra-0.1.3.0
