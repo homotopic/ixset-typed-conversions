@@ -1,4 +1,3 @@
-{-# LANGUAGE ExplicitForAll      #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {- |
    Module     : Data.IxSet.Typed.Conversions
