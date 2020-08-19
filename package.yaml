@@ -18,6 +18,7 @@ description:         Conversions from ixset-typed to other containers; HashMaps,
 dependencies:
 - base >= 4.7 && < 5
 - exceptions
+- free
 - hashable
 - ixset-typed
 - unordered-containers
