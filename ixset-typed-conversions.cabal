@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           ixset-typed-conversions
-version:        0.1.0.1
+version:        0.1.1.0
 synopsis:       Conversions from ixset-typed to other containers.
 description:    Conversions from ixset-typed to other containers; HashMaps, zippers.
 category:       Data Structures
