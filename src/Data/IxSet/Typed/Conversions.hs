@@ -60,7 +60,7 @@ toAscCofreeList f g h xs = flip map (Ix.groupAscBy xs) $ \(x, as) -> f x :< map 
 toAscCofreeListM :: (Ord b, Ix.IsIndexOf ix ixs, Monad m) => (ix -> m c) -> (a -> c) -> (a -> b) -> Ix.IxSet ixs a -> m [Cofree [] c]
 toAscCofreeListM f g h xs = forM (Ix.groupAscBy xs) $ \(x, as) -> liftA2 (:<) (f x) (return $ map ((:< []) . g) (L.sortOn h as))
 
----- | Convert an `IxSet` to a list of `Cofree` by grouping on one of its indices. The result will be sorted in descending
+-- | Convert an `IxSet` to a list of `Cofree` by grouping on one of its indices. The result will be sorted in descending
 -- order on the index. The elements will be sorted according to the `Ord` instance on b.
 toDescCofreeList :: (Ord b, Ix.IsIndexOf ix ixs) => (ix -> c) -> (a -> c) -> (a -> b) -> Ix.IxSet ixs a -> [Cofree [] c]
 toDescCofreeList f g h xs = flip map (Ix.groupDescBy xs) $ \(x, as) -> f x :< map ((:< []) . g) (L.sortOn h as)
