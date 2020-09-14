@@ -10,6 +10,8 @@ module Data.IxSet.Typed.Conversions (
   toHashMap
 , toHashMapBy
 , toHashMapByM
+, toHashMapBy'
+, toHashMapByM'
 , toZipperAsc
 , toZipperDesc
 , toAscCofreeList
@@ -41,6 +43,16 @@ toHashMapBy xs f = HM.fromList $ flip map (Ix.groupDescBy xs) $ \(a, ks) -> (a, 
 toHashMapByM :: (Monad m, Hashable a, IsIndexOf a xs) => IxSet xs k -> (a -> [k] -> m k') -> m (HM.HashMap a k')
 toHashMapByM xs f = fmap HM.fromList $ forM (Ix.groupDescBy xs) $ \(a, ks) -> do
                        z <- f a ks
+                       return (a, z)
+
+-- | Like `toHashMapBy`, but uses a function on the requeried `IxSet` for that key.
+toHashMapBy' :: (Hashable a, IsIndexOf a xs, Indexable xs k) => IxSet xs k -> (a -> IxSet xs k -> k') -> HM.HashMap a k'
+toHashMapBy' xs f = HM.fromList $ flip map (Ix.indexKeys xs) $ \a -> (a, f a (xs Ix.@+ [a]))
+
+-- | Like `toHashMapByM`, but uses a function on the requeried `IxSet` for that key.
+toHashMapByM' :: (Monad m, Hashable a, IsIndexOf a xs, Indexable xs k) => Ix.IxSet xs k -> (a -> Ix.IxSet xs k -> m k') -> m (HM.HashMap a k')
+toHashMapByM' xs f = fmap HM.fromList $ forM (Ix.indexKeys xs) $ \a -> do
+                       z <- f a (xs Ix.@+ [a])
                        return (a, z)
 
 -- | Convert an `IxSet` to a `Zipper` by descending sort on an index.
